@@ -1,0 +1,74 @@
+:root {
+  --bg: #0f172a; /* slate-900 */
+  --card: #111827; /* gray-900 */
+  --text: #e5e7eb; /* gray-200 */
+  --muted: #9ca3af; /* gray-400 */
+  --brand: #22d3ee; /* cyan-400 */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.muted { color: var(--muted); }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.6rem 0.75rem; text-align: left; }
+th { color: var(--muted); font-weight: 600; font-size: 0.9rem; }
+tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+tr:last-child { border-bottom: none; }
+
+.rowTop1 td { color: #fde68a; } /* amber-200 */
+.rowTop2 td { color: #a7f3d0; } /* emerald-200 */
+.rowTop3 td { color: #93c5fd; } /* blue-300 */
+
+.form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+}
+
+.button {
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  background: var(--brand);
+  color: #0c4a6e;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.error { color: #fca5a5; margin-top: 0.5rem; }
+.success { color: #86efac; margin-top: 0.5rem; }
