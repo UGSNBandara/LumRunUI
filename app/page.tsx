@@ -1,4 +1,4 @@
-import AddUserForm from './add-user-form';
+import AddPlayerTopbar from './add-player';
 // Use path alias to avoid deep relative paths
 import { getUsers } from '@/lib/users';
 
@@ -6,6 +6,8 @@ export default async function HomePage() {
   const users = await getUsers();
 
   return (
+    <>
+    <AddPlayerTopbar />
     <div className="container">
       <div className="card">
         <h1 className="title">LumRun Scoreboard</h1>
@@ -37,9 +39,9 @@ export default async function HomePage() {
             </tbody>
           </table>
         </div>
-        <AddUserForm />
       </div>
     </div>
+    </>
   );
 }
 

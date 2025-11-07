@@ -1,74 +1,117 @@
+/* Fire themed globals + translucent layout */
 :root {
-  --bg: #0f172a; /* slate-900 */
-  --card: #111827; /* gray-900 */
-  --text: #e5e7eb; /* gray-200 */
-  --muted: #9ca3af; /* gray-400 */
-  --brand: #22d3ee; /* cyan-400 */
+  --bg: #0b0b0f;
+  --card: rgba(17, 24, 39, 0.35);
+  --text: #f3f4f6;
+  --muted: #cbd5e1;
+  --fire-red: #ef4444;
+  --fire-orange: #f59e0b;
+  --fire-yellow: #fbbf24;
+  --border: rgba(255,255,255,0.10);
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background:
+    linear-gradient(rgba(10, 15, 25, 0.78), rgba(10, 15, 25, 0.88)),
+    url('/back.png') center/cover fixed no-repeat;
   color: var(--text);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  max-width: 880px;
+  margin: 1rem auto .5rem;
+  padding: 0 1rem;
+}
+.topbarLeft { display: flex; align-items: center; gap: .5rem; }
+.topbarRight { display: flex; align-items: center; gap: .5rem; }
+
+.topButton, .button {
+  padding: .6rem .95rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg,var(--fire-red),var(--fire-orange),var(--fire-yellow));
+  color: #111827;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  transition: transform .08s ease, filter .18s ease;
+}
+.topButton:hover, .button:hover { filter: brightness(1.07); }
+.topButton:active, .button:active { transform: translateY(1px); }
+
 .container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
+  max-width: 880px;
+  margin: 0 auto 2.5rem;
+  padding: 0 1rem;
 }
 
 .card {
   background: var(--card);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 1.1rem 1.25rem 1.4rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
 }
 
-.title {
-  font-size: 1.75rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-}
-
+.title { font-size: 1.7rem; font-weight: 800; letter-spacing: .6px; }
 .muted { color: var(--muted); }
 
 table { width: 100%; border-collapse: collapse; }
-th, td { padding: 0.6rem 0.75rem; text-align: left; }
-th { color: var(--muted); font-weight: 600; font-size: 0.9rem; }
-tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+th, td { padding: .55rem .7rem; text-align: left; }
+th { color: var(--muted); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .5px; }
+tr { border-bottom: 1px solid rgba(255,255,255,0.07); }
 tr:last-child { border-bottom: none; }
 
-.rowTop1 td { color: #fde68a; } /* amber-200 */
-.rowTop2 td { color: #a7f3d0; } /* emerald-200 */
-.rowTop3 td { color: #93c5fd; } /* blue-300 */
+.rowTop1 td, .rowTop2 td, .rowTop3 td { color: var(--text); }
 
-.form {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
+.form { display: flex; gap: .5rem; margin-top: 1rem; }
 .input {
   flex: 1;
-  padding: 0.6rem 0.75rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.04);
+  padding: .6rem .75rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
   color: var(--text);
 }
 
-.button {
-  padding: 0.6rem 0.9rem;
-  border-radius: 8px;
-  background: var(--brand);
-  color: #0c4a6e;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-}
+.error { color: #f87171; font-size: .85rem; }
+.success { color: #86efac; font-size: .85rem; }
 
-.error { color: #fca5a5; margin-top: 0.5rem; }
-.success { color: #86efac; margin-top: 0.5rem; }
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+.modalCard {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(12,18,30,0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1rem 1.1rem 1.25rem;
+  box-shadow: 0 10px 35px rgba(0,0,0,.45);
+}
+.modalHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: .75rem; }
+.modalTitle { font-weight: 800; font-size: 1.1rem; }
+.iconButton { background: transparent; color: var(--text); border: none; font-size: 1.15rem; cursor: pointer; }
+
+@media (max-width: 640px) {
+  .title { font-size: 1.45rem; }
+  th, td { padding: .5rem .55rem; }
+  .card { padding: .9rem .9rem 1.1rem; }
+}
