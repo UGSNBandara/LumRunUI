@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 // Use path alias for cleaner imports
 import { getUsers, createUser } from '@/lib/users';
 
+// Ensure this route is always dynamic and uses Node.js runtime on Vercel
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 // GET /api/users - list users sorted by highScore desc
 export async function GET() {
   try {

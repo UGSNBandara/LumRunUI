@@ -1,12 +1,9 @@
 import { MongoClient, Db, Collection } from 'mongodb';
 
-const uri = process.env.MONGO_URL!; // Ensure defined via env
+// Read env lazily to avoid throwing during build/import time on Vercel
+let uri: string | undefined = process.env.MONGO_URL;
 const dbName = process.env.DB_NAME || 'game';
 const collName = process.env.COLL_NAME || 'users';
-
-if (!uri) {
-  throw new Error('Missing MONGO_URL environment variable');
-}
 
 interface Cached {
   client: MongoClient | null;
@@ -25,6 +22,13 @@ if (!(global as any)._mongoCached) {
 }
 
 export async function getUsersCollection(): Promise<Collection> {
+  // Validate required envs only when actually used at runtime
+  if (!uri) {
+    uri = process.env.MONGO_URL;
+    if (!uri) {
+      throw new Error('Missing MONGO_URL environment variable');
+    }
+  }
   if (cached.users) return cached.users;
   if (!cached.client) {
     cached.client = new MongoClient(uri, {
